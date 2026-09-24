@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Team Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- TABS HEADER BAR -->
+  <div class="tabs-header" id="tabs-bar">
+    <div class="logo-badge">OUR <span>PORTFOLIO</span></div>
+    <div class="tab-btn active" id="tab-home-page" onclick="activateTab('home-page')">
+      <span>🏠 Главный</span>
+    </div>
+  </div>
+
+  <!-- CONTENT AREA -->
+  <div class="content-area">
+
+    <!-- HOME PAGE -->
+    <div id="home-page" class="page-view active">
+      <section class="hero">
+        <div class="hero-tag">01 — DIGITAL PORTFOLIO</div>
+        <h1 class="hero-title">We design & build digital experiences.</h1>
+        <p class="hero-subtitle">Біз — заманауи веб-интерфейстерді, адаптивті дизайнды және сапалы кодты бағалайтын Frontend әзірлеушілер тобымыз.</p>
+      </section>
+
+      <section class="section-container">
+        <div class="sec-subtitle">02 — OUR PEOPLE</div>
+        <h2 class="sec-title">Team Members</h2>
+        <div class="team-grid">
+          <div class="team-card" onclick="openTab('amina-cv', '👤 Yedil Amina')">
+            <img class="card-img" src="amina.jpg" alt="Амина">
+            <div class="card-overlay">
+              <div class="member-num">01</div>
+              <div class="member-name">Yedil Amina</div>
+              <div class="member-role">Frontend Developer</div>
+            </div>
+          </div>
+          <div class="team-card" onclick="openTab('akbota-cv', '👤 Daurenkyzy Akbota')">
+            <img class="card-img" src="akbota.jpg" alt="Ақбота">
+            <div class="card-overlay">
+              <div class="member-num">02</div>
+              <div class="member-name">Daurenkyzy Akbota</div>
+              <div class="member-role">Frontend / UI Designer</div>
+            </div>
+          </div>
+          <div class="team-card" onclick="openTab('enkhara-cv', '👤 Dauletbek Enkhara')">
+            <img class="card-img" src="enkhara.jpg" alt="Энхара">
+            <div class="card-overlay">
+              <div class="member-num">03</div>
+              <div class="member-name">Dauletbek Enkhara</div>
+              <div class="member-role">Frontend Developer</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-container">
+        <div class="sec-subtitle">03 — PORTFOLIO & CV</div>
+        <h2 class="sec-title">HTML Резюмелер</h2>
+        <div class="resume-grid">
+          <div class="resume-card">
+            <div>
+              <div class="resume-badge">HTML CV / PAGE</div>
+              <div class="resume-name">Yedil Amina</div>
+              <div class="resume-desc">Frontend әзірлеушінің толық жеке резюме беті.</div>
+            </div>
+            <button class="resume-btn" onclick="openTab('amina-cv', '👤 Yedil Amina')">Вкладкада ашу →</button>
+          </div>
+          <div class="resume-card">
+            <div>
+              <div class="resume-badge">HTML CV / PAGE</div>
+              <div class="resume-name">Daurenkyzy Akbota</div>
+              <div class="resume-desc">Frontend / UI Designer маманның портфолио-резюмесі.</div>
+            </div>
+            <button class="resume-btn" onclick="openTab('akbota-cv', '👤 Daurenkyzy Akbota')">Вкладкада ашу →</button>
+          </div>
+          <div class="resume-card">
+            <div>
+              <div class="resume-badge">HTML CV / PAGE</div>
+              <div class="resume-name">Dauletbek Enkhara</div>
+              <div class="resume-desc">Frontend әзірлеушінің жеке HTML резюме парақшасы.</div>
+            </div>
+            <button class="resume-btn" onclick="openTab('enkhara-cv', '👤 Dauletbek Enkhara')">Вкладкада ашу →</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-container">
+        <div class="sec-subtitle">04 — SKILLS</div>
+        <h2 class="sec-title">Технологиялар</h2>
+        <div class="tech-box">
+          <div class="tech-item">HTML5</div>
+          <div class="tech-item">CSS3</div>
+          <div class="tech-item">JavaScript</div>
+          <div class="tech-item">Git / GitHub</div>
+          <div class="tech-item">UI/UX Design</div>
+        </div>
+      </section>
+
+      <footer>
+        <p>© 2026 Our Team Portfolio. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <!-- CV PAGES -->
+    <div id="amina-cv" class="page-view">
+      <div class="cv-container">
+        <div class="cv-header">
+          <img src="amina.jpg" alt="Yedil Amina" class="cv-avatar">
+          <div>
+            <h1 class="cv-title">Yedil Amina</h1>
+            <p class="cv-subtitle">Frontend Developer</p>
+          </div>
+        </div>
+        <div class="cv-section">
+          <h2 class="cv-sec-title">Мен туралы</h2>
+          <p class="cv-text">Веб-интерфейстерді құруға құштар Frontend әзірлеушімін. HTML, CSS, JavaScript арқылы сапалы код жазамын.</p>
+        </div>
+        <div class="cv-section">
+          <h2 class="cv-sec-title">Дағдылар</h2>
+          <div class="tech-box">
+            <div class="tech-item">HTML5 / CSS3</div>
+            <div class="tech-item">JavaScript (ES6+)</div>
+            <div class="tech-item">Git / GitHub</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="akbota-cv" class="page-view">
+      <div class="cv-container">
+        <div class="cv-header">
+          <img src="akbota.jpg" alt="Daurenkyzy Akbota" class="cv-avatar">
+          <div>
+            <h1 class="cv-title">Daurenkyzy Akbota</h1>
+            <p class="cv-subtitle">Frontend / UI Designer</p>
+          </div>
+        </div>
+        <div class="cv-section">
+          <h2 class="cv-sec-title">Мен туралы</h2>
+          <p class="cv-text">Көз тартарлық UI/UX дизайн мен сапалы Frontend кодын ұштастыратын маманмын.</p>
+        </div>
+        <div class="cv-section">
+          <h2 class="cv-sec-title">Дағдылар</h2>
+          <div class="tech-box">
+            <div class="tech-item">Figma / UI Design</div>
+            <div class="tech-item">HTML5 / CSS3</div>
+            <div class="tech-item">Responsive Design</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="enkhara-cv" class="page-view">
+      <div class="cv-container">
+        <div class="cv-header">
+          <img src="enkhara.jpg" alt="Dauletbek Enkhara" class="cv-avatar">
+          <div>
+            <h1 class="cv-title">Dauletbek Enkhara</h1>
+            <p class="cv-subtitle">Frontend Developer</p>
+          </div>
+        </div>
+        <div class="cv-section">
+          <h2 class="cv-sec-title">Мен туралы</h2>
+          <p class="cv-text">Логикалық ойлауы жоғары, веб-технологияларды белсенді меңгеріп жүрген маманмын.</p>
+        </div>
+        <div class="cv-section">
+          <h2 class="cv-sec-title">Дағдылар</h2>
+          <div class="tech-box">
+            <div class="tech-item">HTML5 / CSS3</div>
+            <div class="tech-item">JavaScript</div>
+            <div class="tech-item">VS Code</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
