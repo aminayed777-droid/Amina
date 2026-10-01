@@ -9,51 +9,86 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
 
-    body { 
-      background-color: #121316; 
-      color: #ffffff; 
-      line-height: 1.6;
+    /* Тема айнымалылары (Dark / Light Mode) */
+    :root {
+      --bg-color: #121316;
+      --header-bg: #18191d;
+      --card-bg: #18191d;
+      --subcard-bg: #0d1117;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-color: #ffffff;
+      --subtext-color: #8a8f99;
+      --accent-color: #58a6ff;
+      --btn-bg: #21262d;
+      --btn-hover: #30363d;
+      --table-border: #30363d;
+      --table-cell-bg: #161b22;
+      --table-active-cell: #238636;
     }
 
-    /* 1. TOP TABS BAR */
+    body.light-theme {
+      --bg-color: #f6f8fa;
+      --header-bg: #ffffff;
+      --card-bg: #ffffff;
+      --subcard-bg: #f0f3f6;
+      --border-color: rgba(0, 0, 0, 0.12);
+      --text-color: #1f2328;
+      --subtext-color: #636c76;
+      --accent-color: #0969da;
+      --btn-bg: #eaeef2;
+      --btn-hover: #d0d7de;
+      --table-border: #d0d7de;
+      --table-cell-bg: #ffffff;
+      --table-active-cell: #2da44e;
+    }
+
+    body { 
+      background-color: var(--bg-color); 
+      color: var(--text-color); 
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* TOP TABS BAR */
     .tabs-header {
       position: fixed;
       top: 0; left: 0; width: 100%;
       height: 55px;
-      background: #18191d;
+      background: var(--header-bg);
       display: flex; align-items: center;
       padding: 0 20px;
       gap: 8px;
       z-index: 1000;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid var(--border-color);
       overflow-x: auto;
+      transition: background-color 0.3s;
     }
 
     .tabs-header::-webkit-scrollbar { height: 3px; }
-    .tabs-header::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); }
+    .tabs-header::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.3); }
 
     .logo-badge {
       font-weight: 800;
       font-size: 0.9rem;
       letter-spacing: 1px;
       margin-right: 15px;
-      color: #fff;
+      color: var(--text-color);
       white-space: nowrap;
     }
-    .logo-badge span { color: #8a8f99; }
+    .logo-badge span { color: var(--subtext-color); }
 
     .tab-btn {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: rgba(255, 255, 255, 0.04);
-      color: #8a8f99;
+      background: rgba(128, 128, 128, 0.1);
+      color: var(--subtext-color);
       padding: 8px 16px;
       border-radius: 10px 10px 0 0;
       font-size: 0.85rem;
       font-weight: 500;
       cursor: pointer;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
       border-bottom: none;
       transition: all 0.2s ease;
       white-space: nowrap;
@@ -61,15 +96,15 @@
     }
 
     .tab-btn:hover {
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
+      background: rgba(128, 128, 128, 0.2);
+      color: var(--text-color);
     }
 
     .tab-btn.active {
-      background: #121316;
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.15);
-      border-bottom: 2px solid #ffffff;
+      background: var(--bg-color);
+      color: var(--text-color);
+      border-color: var(--border-color);
+      border-bottom: 2px solid var(--accent-color);
       font-weight: 600;
     }
 
@@ -81,14 +116,29 @@
       height: 18px;
       border-radius: 50%;
       font-size: 11px;
-      color: #8a8f99;
+      color: var(--subtext-color);
       transition: 0.2s;
     }
 
     .tab-close:hover {
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
+      background: rgba(128, 128, 128, 0.3);
+      color: var(--text-color);
     }
+
+    .theme-toggle-btn {
+      margin-left: auto;
+      background: var(--btn-bg);
+      color: var(--accent-color);
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: 0.3s;
+    }
+    .theme-toggle-btn:hover { background: var(--btn-hover); }
 
     .content-area { margin-top: 55px; }
     .page-view { display: none; }
@@ -99,12 +149,12 @@
       display: flex; flex-direction: column; justify-content: center;
       max-width: 1100px; margin: 0 auto; padding: 60px 20px 20px 20px;
     }
-    .hero-tag { color: #8a8f99; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    .hero-tag { color: var(--subtext-color); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
     .hero-title { font-size: 3.2rem; font-weight: 800; line-height: 1.15; max-width: 850px; margin-bottom: 15px; }
-    .hero-subtitle { color: #9a9fa9; font-size: 1.05rem; max-width: 600px; }
+    .hero-subtitle { color: var(--subtext-color); font-size: 1.05rem; max-width: 600px; }
 
     .section-container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
-    .sec-subtitle { color: #8a8f99; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+    .sec-subtitle { color: var(--subtext-color); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
     .sec-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 30px; }
 
     .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
@@ -112,9 +162,9 @@
       position: relative; height: 400px; border-radius: 20px;
       overflow: hidden; background: #1c1d22; cursor: pointer;
       transition: transform 0.3s ease, border-color 0.3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
     }
-    .team-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.25); }
+    .team-card:hover { transform: translateY(-6px); border-color: var(--accent-color); }
     .card-img { width: 100%; height: 100%; object-fit: cover; }
     .card-overlay {
       position: absolute; inset: 0;
@@ -125,59 +175,62 @@
     .member-name { font-size: 1.4rem; font-weight: 600; color: #fff; }
     .member-role { font-size: 0.85rem; color: #a0a5b1; }
 
-    .resume-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+    .resume-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
     .resume-card {
-      background: #18191d; border-radius: 20px; padding: 30px;
-      border: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; justify-content: space-between;
+      background: var(--card-bg); border-radius: 20px; padding: 30px;
+      border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between;
+      transition: background-color 0.3s;
     }
-    .resume-badge { font-size: 0.75rem; color: #8a8f99; text-transform: uppercase; font-weight: 600; margin-bottom: 10px; }
+    .resume-badge { font-size: 0.75rem; color: var(--subtext-color); text-transform: uppercase; font-weight: 600; margin-bottom: 10px; }
     .resume-name { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
-    .resume-desc { font-size: 0.88rem; color: #9a9fa9; margin-bottom: 25px; }
+    .resume-desc { font-size: 0.88rem; color: var(--subtext-color); margin-bottom: 25px; }
 
     .resume-btn {
-      background: rgba(255, 255, 255, 0.08); color: #fff;
-      padding: 12px 20px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--btn-bg); color: var(--text-color);
+      padding: 12px 20px; border-radius: 12px; border: 1px solid var(--border-color);
       font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: 0.3s;
       width: fit-content;
     }
-    .resume-btn:hover { background: #fff; color: #121316; }
+    .resume-btn:hover { background: var(--btn-hover); }
 
     /* DOM ТАПСЫРМАЛАРЫНЫҢ СТИЛЬДЕРІ */
     .task-container-wrapper {
       max-width: 900px; margin: 40px auto; padding: 40px;
-      background: #18191d; border-radius: 24px; border: 1px solid rgba(255,255,255,0.08);
+      background: var(--card-bg); border-radius: 24px; border: 1px solid var(--border-color);
+      transition: background-color 0.3s;
     }
     .sub-card {
-      background: #0d1117; border: 1px solid #21262d;
+      background: var(--subcard-bg); border: 1px solid var(--border-color);
       border-radius: 12px; padding: 20px; margin-bottom: 20px;
+      transition: background-color 0.3s;
     }
     .sub-card-title {
-      font-size: 0.75rem; font-weight: 600; color: #8b949e;
+      font-size: 0.75rem; font-weight: 600; color: var(--subtext-color);
       text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;
     }
     .action-btn {
-      background: #21262d; color: #58a6ff; border: 1px solid #30363d;
+      background: var(--btn-bg); color: var(--accent-color); border: 1px solid var(--border-color);
       padding: 10px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 600;
       cursor: pointer; margin-top: 10px; transition: 0.2s ease;
     }
-    .action-btn:hover { background: #30363d; color: #ffffff; }
+    .action-btn:hover { background: var(--btn-hover); color: var(--text-color); }
     .result-box {
-      background: #161b22; padding: 12px 16px; border-radius: 8px;
-      margin-top: 8px; font-size: 0.95rem; color: #e6edf3;
+      background: var(--table-cell-bg); padding: 12px 16px; border-radius: 8px;
+      margin-top: 8px; font-size: 0.95rem; color: var(--text-color);
+      border: 1px solid var(--border-color);
     }
     .old-element {
       background: #da3633; color: #ffffff; padding: 12px;
       border-radius: 8px; font-weight: 500; margin-top: 8px;
     }
     .target-box {
-      background: #21262d; padding: 16px; border-radius: 8px;
-      transition: all 0.3s ease; color: #c9d1d9;
+      background: var(--btn-bg); padding: 16px; border-radius: 8px;
+      transition: all 0.3s ease; color: var(--text-color);
     }
     .target-box.active {
       background: #1f6beb !important; color: #ffffff !important; font-weight: 600;
     }
 
-    /* BODY СОҢЫНА ҚОСЫЛАТЫН DIV СТИЛІ */
     body > .new-div {
       background: #238636;
       color: #ffffff;
@@ -188,19 +241,59 @@
       font-weight: 500;
     }
 
+    /* 3-ТАПСЫРМА: КЕСТЕ СТИЛЬДЕРІ */
+    .form-group {
+      display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; align-items: center;
+    }
+    .form-input-box {
+      display: flex; flex-direction: column; gap: 5px;
+    }
+    .form-input-box label {
+      font-size: 0.8rem; color: var(--subtext-color); font-weight: 600;
+    }
+    .form-input-box input {
+      background: var(--table-cell-bg); border: 1px solid var(--border-color);
+      color: var(--text-color); padding: 8px 12px; border-radius: 8px;
+      outline: none; font-size: 0.9rem; width: 140px;
+    }
+    .counter-badge {
+      display: inline-block; background: var(--accent-color); color: #ffffff;
+      padding: 6px 12px; border-radius: 20px; font-weight: 700; font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+    .table-container {
+      overflow-x: auto; margin-top: 15px;
+    }
+    .custom-table {
+      border-collapse: collapse; width: 100%; border: 1px solid var(--table-border);
+    }
+    .custom-table td {
+      border: 1px solid var(--table-border);
+      padding: 15px; text-align: center; cursor: pointer;
+      background-color: var(--table-cell-bg);
+      user-select: none; transition: background-color 0.2s ease;
+      color: var(--text-color);
+      font-weight: 500;
+    }
+    .custom-table td.painted {
+      background-color: var(--table-active-cell) !important;
+      color: #ffffff !important;
+    }
+
     .cv-container {
       max-width: 900px; margin: 60px auto; padding: 40px;
-      background: #18191d; border-radius: 24px; border: 1px solid rgba(255,255,255,0.08);
+      background: var(--card-bg); border-radius: 24px; border: 1px solid var(--border-color);
+      transition: background-color 0.3s;
     }
-    .cv-header { display: flex; align-items: center; gap: 25px; margin-bottom: 35px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 30px; }
-    .cv-avatar { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.2); }
+    .cv-header { display: flex; align-items: center; gap: 25px; margin-bottom: 35px; border-bottom: 1px solid var(--border-color); padding-bottom: 30px; }
+    .cv-avatar { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border-color); }
     .cv-title { font-size: 2.2rem; font-weight: 800; }
-    .cv-subtitle { color: #8a8f99; font-size: 1rem; margin-top: 4px; }
+    .cv-subtitle { color: var(--subtext-color); font-size: 1rem; margin-top: 4px; }
     .cv-section { margin-bottom: 30px; }
-    .cv-sec-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; color: #fff; border-left: 3px solid #fff; padding-left: 10px; }
-    .cv-text { color: #a0a5b1; font-size: 0.95rem; }
+    .cv-sec-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; color: var(--text-color); border-left: 3px solid var(--accent-color); padding-left: 10px; }
+    .cv-text { color: var(--subtext-color); font-size: 0.95rem; }
 
-    footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 30px 20px; text-align: center; color: #717680; font-size: 0.85rem; margin-top: 40px; }
+    footer { border-top: 1px solid var(--border-color); padding: 30px 20px; text-align: center; color: var(--subtext-color); font-size: 0.85rem; margin-top: 40px; }
   </style>
 </head>
 <body>
@@ -211,6 +304,11 @@
     <div class="tab-btn active" id="tab-home-page" onclick="activateTab('home-page')">
       <span>🏠 Главный</span>
     </div>
+    
+    <!-- 4-ТАПСЫРМА: ТЕМА СЕЛЕКТОРЫ -->
+    <button class="theme-toggle-btn" id="theme-toggle" onclick="toggleTheme()">
+      🌙 Dark Mode
+    </button>
   </div>
 
   <div class="content-area">
@@ -245,6 +343,24 @@
               <div class="resume-desc">Кластарды басқару: classList, active класын қосу/жою.</div>
             </div>
             <button class="resume-btn" onclick="openTab('task2-page', '⚡ 2-тапсырма')">Вкладкада ашу →</button>
+          </div>
+
+          <div class="resume-card">
+            <div>
+              <div class="resume-badge">DOM TASK 3</div>
+              <div class="resume-name">3-тапсырма</div>
+              <div class="resume-desc">Кесте генерациясы, интерактивті ұяшықтар және боялған ұяшықтар есебі.</div>
+            </div>
+            <button class="resume-btn" onclick="openTab('task3-page', '⚡ 3-тапсырма')">Вкладкада ашу →</button>
+          </div>
+
+          <div class="resume-card">
+            <div>
+              <div class="resume-badge">DOM TASK 4</div>
+              <div class="resume-name">4-тапсырма</div>
+              <div class="resume-desc">Түнгі/Күндізгі режимді (Dark Mode / Light Mode) ауыстырғыш.</div>
+            </div>
+            <button class="resume-btn" onclick="openTab('task4-page', '⚡ 4-тапсырма')">Вкладкада ашу →</button>
           </div>
 
         </div>
@@ -326,7 +442,7 @@
     <!-- 1-ТАПСЫРМА БЕТІ -->
     <div id="task1-page" class="page-view">
       <div class="task-container-wrapper">
-        <h2 style="font-size: 1.8rem; margin-bottom: 25px; color: #58a6ff;">1-тапсырма. Элементтермен жұмыс</h2>
+        <h2 style="font-size: 1.8rem; margin-bottom: 25px; color: var(--accent-color);">1-тапсырма. Элементтермен жұмыс</h2>
 
         <div class="sub-card">
           <div class="sub-card-title">1) ID бойынша элементті табу және мәтінін өзгертү</div>
@@ -347,7 +463,7 @@
 
         <div class="sub-card">
           <div class="sub-card-title">4) "&lt;p&gt; Бар ауыспалы абзац" — басқанда түсі/өлшемі өзгереді</div>
-          <p style="cursor: pointer; padding: 8px; margin-top: 5px; color: #58a6ff; transition: all 0.3s;" onclick="changeTextStyle(this)">
+          <p style="cursor: pointer; padding: 8px; margin-top: 5px; color: var(--accent-color); transition: all 0.3s;" onclick="changeTextStyle(this)">
             Бұл ауыспалы абзац (Үстіне басып көр)
           </p>
         </div>
@@ -357,7 +473,7 @@
     <!-- 2-ТАПСЫРМА БЕТІ -->
     <div id="task2-page" class="page-view">
       <div class="task-container-wrapper">
-        <h2 style="font-size: 1.8rem; margin-bottom: 25px; color: #58a6ff;">2-тапсырма. Кластарды басқару (classList)</h2>
+        <h2 style="font-size: 1.8rem; margin-bottom: 25px; color: var(--accent-color);">2-тапсырма. Кластарды басқару (classList)</h2>
 
         <div class="sub-card">
           <div class="sub-card-title">Active класын қосу / жою және консольге шығару</div>
@@ -368,7 +484,55 @@
 
           <button class="action-btn" onclick="toggleActiveClass()">Toggle Active Class</button>
           
-          <p id="class-info" style="margin-top: 12px; color: #8b949e; font-size: 0.85rem;"></p>
+          <p id="class-info" style="margin-top: 12px; color: var(--subtext-color); font-size: 0.85rem;"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3-ТАПСЫРМА БЕТІ (ЖАҢА) -->
+    <div id="task3-page" class="page-view">
+      <div class="task-container-wrapper">
+        <h2 style="font-size: 1.8rem; margin-bottom: 25px; color: var(--accent-color);">3-тапсырма. Интерактивті кесте генерациясы</h2>
+
+        <div class="sub-card">
+          <div class="sub-card-title">Кесте өлшемдерін енгізіңіз</div>
+          
+          <div class="form-group">
+            <div class="form-input-box">
+              <label for="rows-input">Жолдар саны (Rows):</label>
+              <input type="number" id="rows-input" min="1" max="50" value="5">
+            </div>
+            <div class="form-input-box">
+              <label for="cols-input">Бағандар саны (Cols):</label>
+              <input type="number" id="cols-input" min="1" max="50" value="5">
+            </div>
+            <div style="align-self: flex-end;">
+              <button class="action-btn" style="margin-top: 0;" onclick="generateTable()">Создать таблицу</button>
+            </div>
+          </div>
+
+          <div style="margin-top: 15px;">
+            Бояулы ұяшықтар саны: <span id="painted-cells-count" class="counter-badge">0</span>
+          </div>
+
+          <div class="table-container" id="table-wrapper">
+            <!-- Таблица осы жерге динамикалық түрде генерацияланады -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4-ТАПСЫРМА БЕТІ (ЖАҢА) -->
+    <div id="task4-page" class="page-view">
+      <div class="task-container-wrapper">
+        <h2 style="font-size: 1.8rem; margin-bottom: 25px; color: var(--accent-color);">4-тапсырма. Переключатель тёмной темы (Dark Mode)</h2>
+
+        <div class="sub-card">
+          <div class="sub-card-title">Теманы ауыстыру</div>
+          <p style="margin-bottom: 15px; color: var(--subtext-color);">
+            Жоғарғы оң жақтағы батырманы немесе төмендегі батырманы басу арқылы сайттың толық түстік схемасын (Dark/Light) өзгерте аласыз.
+          </p>
+          <button class="action-btn" onclick="toggleTheme()">Түстік режимді ауыстыру (Toggle Theme)</button>
         </div>
       </div>
     </div>
@@ -524,7 +688,7 @@
     // 1-Тапсырма: Басқанда түсі өзгереді, ҚАЙТА БАСҚАНДА ӨЗ ҚАЛПЫНА ҚАЙТАДЫ
     function changeTextStyle(el) {
       if (el.style.color === 'rgb(241, 224, 90)' || el.style.color === '#f1e05a') {
-        el.style.color = '#58a6ff';
+        el.style.color = 'var(--accent-color)';
         el.style.fontSize = '1rem';
         el.style.fontWeight = 'normal';
       } else {
@@ -542,6 +706,71 @@
       document.getElementById('class-info').textContent = 'Ағымдағы кластар тізімі: ' + target.className;
       console.log('Элементтің кластары:', target.classList.value);
     }
+
+    // ==========================================
+    // 3-ТАПСЫРМА: ДИНАМИКАЛЫҚ КЕСТЕ ЖӘНЕ ЕСЕПТЕГІШ
+    // ==========================================
+
+    function generateTable() {
+      const rowsInput = document.getElementById('rows-input').value;
+      const colsInput = document.getElementById('cols-input').value;
+      const tableWrapper = document.getElementById('table-wrapper');
+
+      const rowsCount = parseInt(rowsInput, 10);
+      const colsCount = parseInt(colsInput, 10);
+
+      if (isNaN(rowsCount) || isNaN(colsCount) || rowsCount <= 0 || colsCount <= 0) {
+        alert('Өтініш, жол мен баған санын дұрыс енгізіңіз!');
+        return;
+      }
+
+      tableWrapper.innerHTML = '';
+      const table = document.createElement('table');
+      table.className = 'custom-table';
+
+      for (let r = 0; r < rowsCount; r++) {
+        const tr = document.createElement('tr');
+        for (let c = 0; c < colsCount; c++) {
+          const td = document.createElement('td');
+          td.textContent = `${r + 1},${c + 1}`;
+          
+          // Екі рет шерту (Toggle color) логикасы
+          td.addEventListener('click', function() {
+            this.classList.toggle('painted');
+            updatePaintedCount();
+          });
+
+          tr.appendChild(td);
+        }
+        table.appendChild(tr);
+      }
+
+      tableWrapper.appendChild(table);
+      updatePaintedCount();
+    }
+
+    function updatePaintedCount() {
+      const paintedCells = document.querySelectorAll('.custom-table td.painted');
+      document.getElementById('painted-cells-count').textContent = paintedCells.length;
+    }
+
+    // ==========================================
+    // 4-ТАПСЫРМА: ТЕМА (DARK / LIGHT MODE) БАСҚАРУ
+    // ==========================================
+
+    function toggleTheme() {
+      const isLight = document.body.classList.toggle('light-theme');
+      const themeBtn = document.getElementById('theme-toggle');
+
+      if (isLight) {
+        themeBtn.textContent = '☀️ Light Mode';
+      } else {
+        themeBtn.textContent = '🌙 Dark Mode';
+      }
+    }
+
+    // Әдепкі бойынша 3-тапсырма парақшасында бірінші кестені құру
+    generateTable();
   </script>
 
 </body>
