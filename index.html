@@ -364,33 +364,63 @@ a { color: #456a80; }
 @media (max-width: 560px) { .team-list { gap: 15px; } .team-card { padding: 6px; } .team-photo-button { border-radius: 16px; } .team-card-body { padding: 19px 13px 14px; } .team-name { font-size: 24px; } .team-stats { margin-top: 15px; padding-top: 11px; font-size: 10px; } .intro::after { inset: 7px; border-radius: 17px; } .storage-note { align-items: flex-start; } .storage-note::before { margin-top: 6px; } }
 @media (max-width: 380px) { .team-name { font-size: 22px; } .team-card-body { padding-left: 11px; padding-right: 11px; } }
 @media (prefers-reduced-motion: reduce) { .team-card:hover, .button:hover:not(:disabled) { transform: none; } }
+/* Separate workspace screens and profile controls. */
+.workspace { padding-top: 30px; }
+.screen-heading { scroll-margin-top: 24px; }
+.screen-heading:focus { outline: none; }
+.back-link { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 14px; font-size: 12px; text-decoration: none; }
+.back-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.profile-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+.profile-filter-group { display: flex; flex-wrap: wrap; gap: 7px; }
+.profile-filter { min-height: 40px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 8px 12px; border: 1px solid #e2d4c4; border-radius: 12px; background: #fffdf8; color: #786054; cursor: pointer; font-size: 12px; }
+.profile-filter:hover { border-color: #adcbdc; background: #edf5f9; }
+.profile-filter.is-active { border-color: #a9c9dc; background: #dcecf5; color: #39596c; font-weight: 600; box-shadow: inset 0 1px 0 #f6fbfe; }
+.profile-filter-count { min-width: 20px; padding: 2px 5px; border-radius: 6px; background: rgb(82 55 45 / 6%); font-size: 10px; font-variant-numeric: tabular-nums; }
+.profile-sort { position: relative; }
+.profile-sort-toggle { min-height: 40px; padding: 8px 12px; }
+.profile-sort-toggle[aria-expanded="true"] { border-color: #93b6cc; background: #dcecf5; }
+.profile-sort-options { position: absolute; z-index: 2; top: calc(100% + 7px); left: 0; width: 230px; max-width: calc(100vw - 70px); display: grid; gap: 4px; padding: 7px; border: 1px solid #d7e4ec; border-radius: 14px; background: #fffdf9; box-shadow: 0 12px 30px rgb(82 55 45 / 15%); }
+.profile-sort-option { width: 100%; min-height: 40px; padding: 9px 10px; border: 1px solid transparent; border-radius: 9px; background: transparent; color: #786054; cursor: pointer; text-align: left; font-size: 12px; }
+.profile-sort-option:hover { background: #f6eddf; }
+.profile-sort-option.is-active { border-color: #c7dee9; background: #dcecf5; color: #39596c; }
+.profile-results { margin: 0 0 14px; color: #786054; font-size: 11px; }
+@media (max-width: 560px) {
+  .workspace { padding-top: 12px; }
+  .profile-toolbar, .profile-filter-group { width: 100%; }
+  .profile-filter { flex: 1; padding: 8px; gap: 5px; font-size: 11px; white-space: nowrap; }
+  .profile-sort, .profile-sort-toggle { width: 100%; }
+  .profile-sort-options { width: 100%; }
+}
   </style>
 </head>
 <body>
   <div class="app-layout">
     <aside class="sidebar" aria-label="Навигация рабочего пространства">
-      <a class="brand" href="./index.html" aria-label="План на день, на главную"><span class="brand-mark" aria-hidden="true">п.</span><span>План на день<span class="brand-caption">TASK SPACE</span></span></a>
+      <a class="brand" href="#team" aria-label="План на день, на главную"><span class="brand-mark" aria-hidden="true">п.</span><span>План на день<span class="brand-caption">TASK SPACE</span></span></a>
       <p class="sidebar-label">Рабочее пространство</p>
       <nav class="sidebar-nav">
-        <a class="sidebar-link is-current" href="#workspace"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="m8 12 3 3 5-6"/></svg>Задачи</a>
-        <a class="sidebar-link" href="#team"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M17 14a5 5 0 0 1 4 5v1"/></svg>Команда</a>
+        <a class="sidebar-link" href="#workspace"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="m8 12 3 3 5-6"/></svg>Задачи</a>
+        <a class="sidebar-link is-current" href="#team" aria-current="page"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M17 14a5 5 0 0 1 4 5v1"/></svg>Команда</a>
       </nav>
       <div class="sidebar-bottom"><p>Один план.<br>Общее движение.</p><span>Место для ваших дел</span></div>
     </aside>
     <div class="app-main">
-      <header class="topbar"><span class="topbar-title">Рабочее пространство / Обзор</span><span class="topbar-note"><span class="topbar-dot" aria-hidden="true"></span>План на день</span></header>
+      <header class="topbar"><span class="topbar-title" id="topbar-title">Рабочее пространство / Команда</span><span class="topbar-note"><span class="topbar-dot" aria-hidden="true"></span>План на день</span></header>
       <main class="page-shell">
+        <div id="team-screen">
         <section class="intro" aria-labelledby="page-title">
           <svg class="bow-accent" viewBox="0 0 112 90" aria-hidden="true" focusable="false" fill="none"><path d="M52 39C39 17 15 7 12 25C8 43 29 51 52 39Z" fill="#DCECF5" stroke="#9FBBCD" stroke-width="1.4"/><path d="M60 39C73 15 98 9 100 28C102 47 80 52 60 39Z" fill="#DCECF5" stroke="#9FBBCD" stroke-width="1.4"/><path d="M53 44C45 58 37 66 25 70L34 73L32 81C48 74 58 57 59 44" fill="#FFF7EB" stroke="#9FBBCD" stroke-width="1.4"/><path d="M59 44C65 56 73 68 84 72L75 75L76 83C61 75 53 57 53 44" fill="#FFF7EB" stroke="#9FBBCD" stroke-width="1.4"/><rect x="50" y="33" width="14" height="16" rx="5" fill="#FFF7EB" stroke="#9FBBCD" stroke-width="1.4"/></svg>
           <div><p class="eyebrow hero-tag">МЕСТО ДЛЯ ТВОИХ ПЛАНОВ</p><h1 id="page-title">Красивые планы.<br><span class="hero-line-accent">В твоём ритме.</span></h1><p class="intro-copy">Задачи, люди и время для себя —<br class="desktop-break"> всё в одном уютном пространстве.</p><div class="hero-palette" aria-label="Палитра сайта"><span>Голубой</span><span>Кремовый</span><span>Шоколадный</span></div></div>
           <div class="intro-side"><strong>Маленькие шаги каждый день</strong><p>Планируй с удовольствием.</p></div>
         </section>
         <section class="team-section" id="team" aria-labelledby="team-heading">
-          <div class="section-heading"><div><h2 id="team-heading">Ваша команда <span class="section-count">2</span></h2><p>Акбота и Энхара</p></div><span class="section-note">Профили и назначенные задачи</span></div>
+          <div class="section-heading"><div><h2 class="screen-heading" id="team-heading" tabindex="-1">Ваша команда <span class="section-count">2</span></h2><p>Акбота и Энхара</p></div><span class="section-note">Профили и назначенные задачи</span></div>
           <div class="team-list" id="team-list"></div>
         </section>
-        <section class="workspace" id="workspace" aria-labelledby="dashboard-heading">
-          <div class="dashboard-header"><div><h2 class="dashboard-title" id="dashboard-heading">Рабочий список</h2><p class="dashboard-description">Всё, что нужно сделать — в одном месте.</p></div><div class="refresh-group"><button class="button button-secondary" id="refresh-button" type="button">Обновить список</button><p class="refresh-message" id="refresh-message" role="status"></p></div></div>
+        </div>
+        <section class="workspace" id="workspace" aria-labelledby="dashboard-heading" hidden>
+          <a class="back-link" href="#team"><span aria-hidden="true">←</span> К команде</a>
+          <div class="dashboard-header"><div><h2 class="dashboard-title screen-heading" id="dashboard-heading" tabindex="-1">Задачи</h2><p class="dashboard-description">Всё, что нужно сделать — в одном месте.</p></div><div class="refresh-group"><button class="button button-secondary" id="refresh-button" type="button">Обновить список</button><p class="refresh-message" id="refresh-message" role="status"></p></div></div>
           <div class="summary" aria-live="polite">
             <div class="summary-item"><span class="summary-label">Всего задач</span><span class="summary-number" id="task-count">—</span><p class="summary-caption">В вашем рабочем списке</p></div>
             <div class="summary-item completed-stat"><span class="summary-label">Выполнено</span><span class="summary-number" id="completed-count">—</span><p class="summary-caption">Уже позади</p></div>
@@ -399,7 +429,7 @@ a { color: #456a80; }
           <section class="dashboard tasks-section" aria-labelledby="tasks-title">
             <div class="list-heading"><div class="list-title-group"><h3 id="tasks-title">Все задачи</h3><span class="count-badge" id="list-count">— / —</span></div><button class="button button-primary" id="open-create-button" type="button" disabled><span aria-hidden="true">+</span>Добавить задачу</button></div>
             <div class="filter-group" role="group" aria-label="Фильтр задач по статусу"><button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">Все задачи</button><button class="filter-button" type="button" data-filter="active" aria-pressed="false">Невыполненные</button><button class="filter-button" type="button" data-filter="completed" aria-pressed="false">Выполненные</button></div>
-            <div class="search-sort-row"><label class="field"><span>Поиск по названию</span><span class="search-input-wrap"><span class="search-icon" aria-hidden="true"></span><input id="search-input" type="search" placeholder="Найти задачу…" autocomplete="off"></span></label><label class="field"><span>Сортировка через API</span><select id="sort-select"><option value="default">Без сортировки</option><option value="asc">По названию: от А до Я</option><option value="desc">По названию: от Я до А</option></select></label></div>
+            <div class="search-sort-row"><label class="field"><span>Поиск по названию</span><span class="search-input-wrap"><span class="search-icon" aria-hidden="true"></span><input id="search-input" type="search" placeholder="Найти задачу…" autocomplete="off"></span></label><label class="field"><span>Сортировка</span><select id="sort-select"><option value="default">Без сортировки</option><option value="asc">По названию: от А до Я</option><option value="desc">По названию: от Я до А</option></select></label></div>
             <div class="author-filter-row"><label class="field"><span>Автор / исполнитель</span><select id="author-select" disabled><option value="all">Все авторы</option></select></label><button class="button button-secondary" id="reset-filters-button" type="button">Сбросить</button></div>
             <span class="results-label" id="results-label" role="status"></span>
             <p class="storage-note" id="storage-status" role="status" aria-live="polite">Автосохранение в этом браузере</p>
@@ -416,7 +446,30 @@ a { color: #456a80; }
   </div>
   <dialog class="modal profile-modal" id="profile-dialog" aria-labelledby="profile-heading">
     <div class="modal-header"><h2 id="profile-heading">Профиль пользователя</h2><button class="icon-button close-button" id="close-profile-button" type="button" aria-label="Закрыть профиль">×</button></div>
-    <div class="profile-layout"><div class="profile-content" id="profile-content"></div><div class="profile-aside"><div class="profile-aside-header"><p class="profile-summary" id="profile-summary"></p><button class="button button-primary" id="profile-create-button" type="button">Назначить задачу</button></div><div class="notice" id="profile-notice" role="status" hidden></div><div class="profile-tasks" id="profile-tasks"></div></div></div>
+    <div class="profile-layout">
+      <div class="profile-content" id="profile-content"></div>
+      <div class="profile-aside">
+        <div class="profile-aside-header"><p class="profile-summary" id="profile-summary"></p><button class="button button-primary" id="profile-create-button" type="button">Назначить задачу</button></div>
+        <div class="profile-toolbar">
+          <div class="profile-filter-group" role="group" aria-label="Статус задач в профиле">
+            <button class="profile-filter is-active" type="button" data-profile-filter="all" aria-pressed="true" aria-controls="profile-tasks">Все <span class="profile-filter-count" id="profile-all-count">0</span></button>
+            <button class="profile-filter" type="button" data-profile-filter="completed" aria-pressed="false" aria-controls="profile-tasks">Выполнено <span class="profile-filter-count" id="profile-completed-count">0</span></button>
+            <button class="profile-filter" type="button" data-profile-filter="active" aria-pressed="false" aria-controls="profile-tasks">Не выполнено <span class="profile-filter-count" id="profile-active-count">0</span></button>
+          </div>
+          <div class="profile-sort" id="profile-sort">
+            <button class="button button-secondary profile-sort-toggle" id="profile-sort-button" type="button" aria-expanded="false" aria-controls="profile-sort-options"><span aria-hidden="true">↕</span><span id="profile-sort-label">Сортировка</span><span aria-hidden="true">▾</span></button>
+            <div class="profile-sort-options" id="profile-sort-options" role="group" aria-label="Порядок задач в профиле" hidden>
+              <button class="profile-sort-option is-active" type="button" data-profile-sort="default" aria-pressed="true">Без сортировки</button>
+              <button class="profile-sort-option" type="button" data-profile-sort="asc" aria-pressed="false">По названию: от А до Я</button>
+              <button class="profile-sort-option" type="button" data-profile-sort="desc" aria-pressed="false">По названию: от Я до А</button>
+            </div>
+          </div>
+        </div>
+        <p class="profile-results" id="profile-results" role="status" aria-live="polite"></p>
+        <div class="notice" id="profile-notice" role="status" hidden></div>
+        <div class="profile-tasks" id="profile-tasks"></div>
+      </div>
+    </div>
   </dialog>
   <dialog class="modal" id="task-dialog" aria-labelledby="task-dialog-title" aria-describedby="task-message">
     <div class="modal-header"><h2 id="task-dialog-title">Новая задача</h2><button class="icon-button close-button" id="close-task-button" type="button" aria-label="Закрыть окно задачи">×</button></div>
@@ -459,6 +512,8 @@ const state = {
   pendingSortOrder: null,
   editingId: null,
   profileUserId: null,
+  profileFilter: 'all',
+  profileSortOrder: 'default',
   isLoading: true,
   hasLoadedTodos: false,
   usersLoading: true,
@@ -514,6 +569,16 @@ const elements = {
   profileContent: byId('profile-content'),
   profileTasks: byId('profile-tasks'),
   profileSummary: byId('profile-summary'),
+  profileFilterButtons: document.querySelectorAll('[data-profile-filter]'),
+  profileAllCount: byId('profile-all-count'),
+  profileCompletedCount: byId('profile-completed-count'),
+  profileActiveCount: byId('profile-active-count'),
+  profileSort: byId('profile-sort'),
+  profileSortButton: byId('profile-sort-button'),
+  profileSortLabel: byId('profile-sort-label'),
+  profileSortOptions: byId('profile-sort-options'),
+  profileSortButtons: document.querySelectorAll('[data-profile-sort]'),
+  profileResults: byId('profile-results'),
   profileCreateButton: byId('profile-create-button'),
   profileNotice: byId('profile-notice'),
   closeProfileButton: byId('close-profile-button')
@@ -948,20 +1013,55 @@ function renderProfile() {
   });
   elements.profileContent.replaceChildren(identity, list);
 
-  const todos = getAllTodos().filter((todo) => todo.userId === user.id);
-  const completed = todos.filter((todo) => todo.completed);
-  const active = todos.filter((todo) => !todo.completed);
-  elements.profileSummary.textContent = `Всего задач: ${todos.length} · Выполнено: ${completed.length} · Не выполнено: ${active.length}`;
-  elements.profileTasks.replaceChildren();
-  [['Не выполнены', active], ['Выполнены', completed]].forEach(([label, items]) => {
-    const section = createElement('section', 'profile-task-section');
-    section.append(createElement('h3', '', `${label} · ${items.length}`));
-    const taskList = createElement('div', 'task-list');
-    if (items.length) items.forEach((todo) => taskList.append(renderTask(todo)));
-    else taskList.append(emptyState('Задач нет', label === 'Выполнены' ? 'Здесь появятся выполненные задачи.' : 'Все задачи выполнены или ещё не назначены.'));
-    section.append(taskList);
-    elements.profileTasks.append(section);
+  renderProfileTasks();
+}
+
+function renderProfileTasks() {
+  if (!elements.profileDialog.open || state.profileUserId === null) return;
+  const todos = getAllTodos().filter((todo) => todo.userId === state.profileUserId);
+  const completedCount = todos.filter((todo) => todo.completed).length;
+  elements.profileSummary.textContent = `Всего задач: ${todos.length}`;
+  elements.profileAllCount.textContent = String(todos.length);
+  elements.profileCompletedCount.textContent = String(completedCount);
+  elements.profileActiveCount.textContent = String(todos.length - completedCount);
+  elements.profileFilterButtons.forEach((button) => {
+    const active = button.dataset.profileFilter === state.profileFilter;
+    button.classList.toggle('is-active', active);
+    button.setAttribute('aria-pressed', String(active));
   });
+  elements.profileSortButtons.forEach((button) => {
+    const active = button.dataset.profileSort === state.profileSortOrder;
+    button.classList.toggle('is-active', active);
+    button.setAttribute('aria-pressed', String(active));
+  });
+  elements.profileSortLabel.textContent = {
+    default: 'Сортировка', asc: 'Сортировка: А → Я', desc: 'Сортировка: Я → А'
+  }[state.profileSortOrder];
+  const visible = todos.filter((todo) => state.profileFilter === 'all'
+    || (state.profileFilter === 'completed' ? todo.completed : !todo.completed));
+  if (state.profileSortOrder !== 'default') {
+    const direction = state.profileSortOrder === 'asc' ? 1 : -1;
+    visible.sort((a, b) => direction * collator.compare(a.todo, b.todo));
+  }
+  const label = { all: 'Все задачи', completed: 'Выполнено', active: 'Не выполнено' }[state.profileFilter];
+  elements.profileResults.textContent = `${label}: ${visible.length} из ${todos.length}`;
+  const section = createElement('section', 'profile-task-section');
+  section.setAttribute('aria-label', label);
+  const taskList = createElement('div', 'task-list');
+  if (visible.length) visible.forEach((todo) => taskList.append(renderTask(todo)));
+  else taskList.append(emptyState('Задач нет', {
+    all: 'Назначьте первую задачу этому пользователю.',
+    completed: 'Здесь появятся выполненные задачи.',
+    active: 'Все задачи выполнены или ещё не назначены.'
+  }[state.profileFilter]));
+  section.append(taskList);
+  elements.profileTasks.replaceChildren(section);
+}
+
+function setProfileSortOpen(open, returnFocus = false) {
+  elements.profileSortOptions.hidden = !open;
+  elements.profileSortButton.setAttribute('aria-expanded', String(open));
+  if (returnFocus) elements.profileSortButton.focus();
 }
 
 function renderAll() {
@@ -1170,6 +1270,11 @@ function openTaskDialog(todo = null) {
 
 function openProfile(userId) {
   if (!state.users.has(userId)) return;
+  if (state.profileUserId !== userId) {
+    state.profileFilter = 'all';
+    state.profileSortOrder = 'default';
+    setProfileSortOpen(false);
+  }
   state.profileUserId = userId;
   elements.profileCreateButton.disabled = false;
   elements.profileNotice.hidden = true;
@@ -1235,6 +1340,10 @@ elements.taskForm.addEventListener('submit', async (event) => {
       });
       saveChanges(todo, changes);
     }
+    // Keep the saved task visible when a profile status filter is selected.
+    if (state.profileUserId === userId && state.profileFilter !== 'all') {
+      state.profileFilter = completed ? 'completed' : 'active';
+    }
     saved = true;
     const persisted = persistState();
     showNotice(persisted
@@ -1295,16 +1404,25 @@ async function handleTaskAction(event) {
 }
 
 const navigationLinks = document.querySelectorAll('.sidebar-link');
-function updateNavigation() {
-  const currentSection = window.location.hash === '#team' ? '#team' : '#workspace';
+function updateNavigation(moveFocus = false) {
+  const tasksOpen = window.location.hash === '#workspace';
+  const currentSection = tasksOpen ? '#workspace' : '#team';
+  byId('team-screen').hidden = tasksOpen;
+  byId('workspace').hidden = !tasksOpen;
+  byId('topbar-title').textContent = `Рабочее пространство / ${tasksOpen ? 'Задачи' : 'Команда'}`;
+  document.title = `${tasksOpen ? 'Задачи' : 'Команда'} — План на день`;
   navigationLinks.forEach((link) => {
     const active = link.getAttribute('href') === currentSection;
     link.classList.toggle('is-current', active);
-    if (active) link.setAttribute('aria-current', 'location');
+    if (active) link.setAttribute('aria-current', 'page');
     else link.removeAttribute('aria-current');
   });
+  if (moveFocus) {
+    byId(tasksOpen ? 'dashboard-heading' : 'team-heading').focus({ preventScroll: true });
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
 }
-window.addEventListener('hashchange', updateNavigation);
+window.addEventListener('hashchange', () => updateNavigation(true));
 updateNavigation();
 
 elements.taskList.addEventListener('click', handleTaskAction);
@@ -1326,9 +1444,11 @@ elements.taskDialog.addEventListener('close', () => {
 elements.profileDialog.addEventListener('close', () => {
   const userId = state.profileUserId;
   state.profileUserId = null;
+  setProfileSortOpen(false);
+  const tasksOpen = !byId('workspace').hidden;
   const teamButton = elements.teamList.querySelector(`[data-action="profile"][data-user-id="${userId}"]`);
   const authorButton = elements.taskList.querySelector(`[data-action="profile"][data-user-id="${userId}"]`);
-  (teamButton || authorButton || elements.openCreateButton).focus();
+  (tasksOpen ? (authorButton || elements.openCreateButton) : (teamButton || byId('team-heading'))).focus();
 });
 
 [elements.taskDialog, elements.profileDialog].forEach((dialog) => {
@@ -1337,6 +1457,34 @@ elements.profileDialog.addEventListener('close', () => {
     const rect = dialog.getBoundingClientRect();
     if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
   });
+});
+
+elements.profileFilterButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    state.profileFilter = button.dataset.profileFilter;
+    setProfileSortOpen(false);
+    renderProfileTasks();
+  });
+});
+elements.profileSortButton.addEventListener('click', () => {
+  setProfileSortOpen(elements.profileSortOptions.hidden);
+});
+elements.profileSortButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    state.profileSortOrder = button.dataset.profileSort;
+    setProfileSortOpen(false, true);
+    renderProfileTasks();
+  });
+});
+document.addEventListener('click', (event) => {
+  if (!elements.profileSort.contains(event.target)) setProfileSortOpen(false);
+});
+elements.profileDialog.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && !elements.profileSortOptions.hidden) {
+    event.preventDefault();
+    event.stopPropagation();
+    setProfileSortOpen(false, true);
+  }
 });
 
 elements.filterButtons.forEach((button) => {
